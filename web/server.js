@@ -1,6 +1,7 @@
 const path = require('path');
 const fs = require('fs-extra');
 const Hapi = require('@hapi/hapi');
+const Boom = require('boom');
 const dotenv = require('dotenv');
 const origDebug = require('debug');
 const Kernel = require('../src/kernel');
@@ -24,6 +25,17 @@ const init = async () => {
       : false,
     state: {
       strictHeader: false, // Avoid "invalid cookie name" error
+    },
+    routes: {
+      validate: {
+        failAction: async (_request, _h, error) => {
+          if (error.isBoom) {
+            throw Boom.badRequest(error.output.payload.message);
+          }
+
+          throw Boom.badRequest(error.message);
+        },
+      },
     },
   });
   const kernel = new Kernel(server);

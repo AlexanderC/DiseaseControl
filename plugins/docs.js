@@ -52,7 +52,7 @@ class Docs extends Plugin {
     if (kernel.plugins.auth) {
       this.tokenSchema = kernel.Joi.object({
         [kernel.plugins.auth.TOKEN_KEY]: kernel.Joi.string()
-          .required(true)
+          .required()
           .description('Your JWT token')
           .example('your-jwt-token'),
       });

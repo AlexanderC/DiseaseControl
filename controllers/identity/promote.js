@@ -1,21 +1,21 @@
-const AuthController = require('./lib/base-ctrl');
+const BaseController = require('./lib/base-ctrl');
 
-class Promote extends AuthController {
+class Promote extends BaseController {
   method = () => 'PUT';
 
   path = () => '/identity/{id}/promote';
 
   features = () => ({ auth: true, ws: false, docs: true });
 
-  config = ({
-    Joi,
-    server: {
+  config = kernel => {
+    const {
+      Joi,
       plugins: {
-        'hapi-sequelizejs': { default: db },
+        db: { default: db },
       },
-    },
-  }) => {
-    const User = db.getModel('User');
+    } = kernel;
+
+    const User = db(kernel).getModel('User');
 
     return {
       description: 'Update user role',

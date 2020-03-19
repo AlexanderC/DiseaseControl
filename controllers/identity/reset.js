@@ -1,7 +1,7 @@
 const cryptoRandomString = require('crypto-random-string');
-const AuthController = require('./lib/base-ctrl');
+const BaseController = require('./lib/base-ctrl');
 
-class Reset extends AuthController {
+class Reset extends BaseController {
   method = () => 'POST';
 
   path = () => '/identity/reset';

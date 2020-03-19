@@ -1,6 +1,6 @@
-const AuthController = require('./lib/base-ctrl');
+const BaseController = require('./lib/base-ctrl');
 
-class Login extends AuthController {
+class Login extends BaseController {
   method = () => 'POST';
 
   path = () => '/identity/login';

@@ -35,6 +35,34 @@ class DB extends Plugin {
       ],
     };
   }
+
+  /**
+   * Get default database
+   * @param {Kernel} kernel
+   * @returns {HapiSequelize.DB}
+   */
+  default(kernel) {
+    return kernel.server.plugins['hapi-sequelizejs'].default;
+  }
+
+  /**
+   * Initiate a transaction
+   * @param {Kernel} kernel
+   * @param {Function} handler
+   * @returns {Sequelize.Transaction}
+   */
+  async transaction(kernel, handler) {
+    const { sequelize } = this.default(kernel);
+
+    return sequelize.transaction(handler);
+  }
+
+  /**
+   * @returns {Sequelize}
+   */
+  get Sequelize() {
+    return Sequelize;
+  }
 }
 
 module.exports = DB;

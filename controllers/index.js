@@ -1,3 +1,4 @@
 const identityCtrls = require('./identity');
+const tagCtrls = require('./tag');
 
-module.exports = [...identityCtrls];
+module.exports = [...identityCtrls, ...tagCtrls];
