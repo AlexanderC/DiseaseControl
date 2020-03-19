@@ -18,6 +18,7 @@ class User extends Sequelize.Model {
   static get TYPE() {
     return {
       USER: 'user',
+      SUPERVISOR: 'supervisor',
       ADMIN: 'admin',
     };
   }
@@ -28,6 +29,14 @@ class User extends Sequelize.Model {
    */
   isUser() {
     return this.type === User.TYPE.USER;
+  }
+
+  /**
+   * Check if this is an supervisor user
+   * @returns {boolean}
+   */
+  isSupervisor() {
+    return this.type === User.TYPE.SUPERVISOR;
   }
 
   /**

@@ -99,6 +99,12 @@ class Docs extends Plugin {
         routeObj.config.validate.query = routeObj.config.validate.query
           ? routeObj.config.validate.query.append(this.tokenSchema)
           : this.tokenSchema;
+        routeObj.config.plugins = routeObj.config.plugins || {};
+
+        // show lock icon in UI
+        routeObj.config.plugins['hapi-swagger'] = {
+          security: { jwt: {} },
+        };
       }
 
       predefinedTags.push('secured');
