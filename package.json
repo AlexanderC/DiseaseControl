@@ -1,0 +1,78 @@
+{
+  "name": "dc-api",
+  "version": "1.0.0",
+  "description": "DiseaseControl API",
+  "main": "index.js",
+  "scripts": {
+    "start:dev": "DEBUG=* npx nodemon --watch controllers --watch plugins --watch src --watch templates --watch models --watch web ./web/server.js",
+    "start": "npx pm2 start ./web/server.js",
+    "stop": "npx pm2 stop ./web/server.js",
+    "monitor": "npx pm2 monit",
+    "postinstall": "npx check-engine",
+    "lint": "npx eslint src web plugins models controllers --fix",
+    "lint-staged": "npx lint-staged"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:AlexanderC/DiseaseControl.git"
+  },
+  "author": {
+    "name": "Alex Cucer",
+    "email": "alexander.moldova@gmail.com"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "@hapi/hapi": "19.x.x",
+    "@hapi/inert": "6.x.x",
+    "@hapi/joi": "17.x.x",
+    "@hapi/vision": "6.x.x",
+    "boom": "7.x.x",
+    "crypto-random-string": "3.x.x",
+    "debug": "^4.1.1",
+    "dotenv": "8.x.x",
+    "fs-extra": "8.x.x",
+    "hapi-and-healthy": "7.x.x",
+    "hapi-auth-jwt2": "8.x.x",
+    "hapi-cors": "1.x.x",
+    "hapi-graceful-pm2": "1.x.x",
+    "hapi-pagination": "3.x.x",
+    "hapi-plugin-websocket": "2.x.x",
+    "hapi-sequelizejs": "3.x.x",
+    "hapi-swagger": "12.x.x",
+    "inflected": "2.x.x",
+    "jsonwebtoken": "^8.5.1",
+    "mysql2": "2.x.x",
+    "nodemailer": "^6.4.5",
+    "pm2": "4.x.x",
+    "sequelize": "5.x.x",
+    "sequelize-encrypted": "1.x.x",
+    "sequelize-paginate": "1.x.x",
+    "twig": "1.x.x"
+  },
+  "devDependencies": {
+    "babel-eslint": "^10.0.1",
+    "eslint": "^5.9.0",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-config-prettier": "^6.9.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-prettier": "^3.1.2",
+    "husky": "^1.3.1",
+    "lint-staged": "^8.1.5",
+    "nodemon": "^2.0.2",
+    "prettier": "^1.19.1"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.js": [
+      "npx eslint src web plugins models controllers --fix",
+      "git add"
+    ]
+  },
+  "engines": {
+    "node": ">=12.0.0"
+  }
+}

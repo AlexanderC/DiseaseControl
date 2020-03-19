@@ -1,0 +1,8 @@
+.gitignore
+.gitlab-ci.yml
+ci.env
+sample.env
+README.md
+index.js
+bin/
+.vscode/

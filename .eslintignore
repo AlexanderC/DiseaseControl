@@ -1,0 +1,3 @@
+cli/*.js
+bin/*.js
+assets/**/*.js
