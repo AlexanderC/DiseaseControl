@@ -93,8 +93,7 @@ Documentation
 TODO
 ----
 
-- [ ] Inventory CRUD
-- [ ] Allow superviser to be asigned to a hospital
 - [ ] Add notifications
 - [ ] Add seeds (admin, hospitals, tags)
 - [ ] Websocket endpoint for realtime data
+- [ ] Move logic from controllers into services
