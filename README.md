@@ -3,7 +3,7 @@ DiseaseControl API
 
 DiseaseControl is a disease control platform that facilitates end-to-end tracking of disease cases and resolutions keeping all nodes involved, starting from local level and growing up into a county wide level. This piece of software is originally designed to cover the needs of control software for Moldovan healthcare system for fighting against Coronavirus Covid-19. 
 
-> The project started at [C19.md Initiative](https://c19.md/) Hackaton (March 2020).
+> The project started at [C19.md Initiative](https://c19.md/) [Hackaton](https://c19.md/hackathon) (March 2020).
 
 Prerequisites
 -----------
