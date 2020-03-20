@@ -56,9 +56,7 @@ class BaseController extends Controller {
     const schema = onlyUsername ? { username } : { username, password };
 
     return {
-      payload: Joi.object(schema).label(
-        onlyUsername ? 'PartialCredentials' : 'Credentials',
-      ),
+      payload: Joi.object(schema).label(onlyUsername ? 'PartialUser' : 'User'),
     };
   }
 }

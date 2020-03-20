@@ -7,7 +7,7 @@ const origDebug = require('debug');
 const Kernel = require('../src/kernel');
 
 const debug = (...args) =>
-  process.env.DEBUG ? origDebug('qu')(...args) : undefined;
+  process.env.DEBUG ? origDebug('dc')(...args) : undefined;
 const init = async () => {
   // Configure environment
   let configFile = path.resolve(process.cwd(), '.env');
