@@ -1,8 +1,13 @@
 .gitignore
-.gitlab-ci.yml
-ci.env
 sample.env
 README.md
 index.js
 bin/
 .vscode/
+dc-api.tar
+.eslintrc
+.eslintignore
+.prettierrc
+LICENSE
+node_modules/
+.env

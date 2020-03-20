@@ -78,8 +78,8 @@ Deploy
 ------
 
 ```bash
-DEPLOY_SERVER_ROOT=/root/api DEPLOY_SERVER_DSN=root@139.59.159.64 \
- ./bin/deploy.sh
+cp .env .docker.env # Make modifications here...
+DEPLOY_SERVER_ROOT=/root/api DEPLOY_SERVER_DSN=root@139.59.159.64 ./bin/deploy.sh
 ```
 
 > Before proceeding ensure you ssh key is authorized!
@@ -89,3 +89,9 @@ Documentation
 
 - [Api Docs](http://localhost:8000/)
 - [Product Vision](https://docs.google.com/document/d/15XOLQsRgfhh7dy5_gKIxMTNreHUQNgU5r3dOybIkKrw/edit)
+
+TODO
+----
+
+- [ ] Inventory CRUD
+- [ ] Patient Model and CRUD
