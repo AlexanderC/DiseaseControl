@@ -9,8 +9,5 @@ module.exports = [
   new LoginController(),
   new ResetController(),
   new PromoteController(),
+  new RegisterController(),
 ];
-
-if (parseInt(process.env.AUTH_ALLOW_REGISTRATION, 10)) {
-  module.exports.push(new RegisterController());
-}

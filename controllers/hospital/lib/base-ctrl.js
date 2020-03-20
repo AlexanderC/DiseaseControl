@@ -20,6 +20,33 @@ class BaseController extends Controller {
   }
 
   /**
+   * Get inventory model
+   * @param {Hapi.Request} request
+   * @returns {Inventory}
+   */
+  _inventoryModel(request) {
+    return request.getModel('Inventory');
+  }
+
+  /**
+   * Get user model
+   * @param {Hapi.Request} request
+   * @returns {User}
+   */
+  _userModel(request) {
+    return request.getModel('User');
+  }
+
+  /**
+   * Get hospital inventory model
+   * @param {Hapi.Request} request
+   * @returns {HospitalInventory}
+   */
+  _hospitaliInventoryModel(request) {
+    return request.getModel('HospitalInventory');
+  }
+
+  /**
    * Tag validation schema
    * @param {Joi}
    * @param {boolean} partial
@@ -31,9 +58,21 @@ class BaseController extends Controller {
       .optional()
       .example(['some-tag']);
 
+    const inventory = Joi.array()
+      .items(Joi.string())
+      .optional()
+      .example(['bed']);
+
     const description = Joi.string()
       .optional()
       .example('Some hospital description');
+
+    const supervisor = Joi.number()
+      .integer()
+      .optional()
+      .min(1)
+      .description('User ID')
+      .example(1);
 
     if (partial) {
       return {
@@ -48,6 +87,8 @@ class BaseController extends Controller {
         payload: Joi.object({
           tags,
           description,
+          inventory,
+          supervisor,
         }).label('PartialHospital'),
       };
     }
@@ -60,6 +101,8 @@ class BaseController extends Controller {
           .example('IMSP SCR „Timofei Moșneaga”'),
         description,
         tags,
+        inventory,
+        supervisor,
       }).label('Hospital'),
     };
   }

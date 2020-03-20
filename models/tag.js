@@ -20,9 +20,10 @@ module.exports = sequelize => {
   );
 
   Tag.associate = models => {
-    const { Hospital } = models;
+    const { Hospital, Inventory } = models;
 
-    Tag.belongsToMany(Hospital, { through: 'HospitalTags', as: 'hospitals' });
+    Tag.belongsToMany(Hospital, { through: 'HospitalTag', as: 'hospitals' });
+    Tag.belongsToMany(Inventory, { through: 'InventoryTag', as: 'inventory' });
   };
 
   return Tag;

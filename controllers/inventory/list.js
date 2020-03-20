@@ -3,19 +3,19 @@ const BaseController = require('./lib/base-ctrl');
 class List extends BaseController {
   method = () => 'GET';
 
-  path = () => '/hospital';
+  path = () => '/inventory';
 
   features = () => ({ auth: false, ws: false, docs: true });
 
-  config = () => ({ description: 'List hospitals' });
+  config = () => ({ description: 'List inventory items' });
 
   /**
    * @inheritdoc
    */
   async handler(_kernel, request, _h) {
-    const Hospital = this._hospitalModel(request);
+    const Inventory = this._inventoryModel(request);
 
-    return Hospital.scope('tags', 'inventory', 'supervisors').findAll();
+    return Inventory.findAll();
   }
 }
 

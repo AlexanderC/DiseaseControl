@@ -11,11 +11,6 @@ module.exports = sequelize => {
       id: { type: Sequelize.INTEGER, autoIncrement: true, primaryKey: true },
       name: { type: Sequelize.STRING, allowNull: false, unique: true },
       description: { type: Sequelize.TEXT, allowNull: true },
-      quantity: {
-        type: Sequelize.INTEGER.UNSIGNED,
-        allowNull: false,
-        defaultValue: 0,
-      },
       createdAt: Sequelize.DATE,
       updatedAt: Sequelize.DATE,
     },
@@ -26,11 +21,11 @@ module.exports = sequelize => {
   );
 
   Inventory.associate = models => {
-    const { Tag, Hospital } = models;
+    const { Tag, Hospital, HospitalInventory } = models;
 
-    Inventory.belongsToMany(Tag, { through: 'InventoryTags', as: 'tags' });
+    Inventory.belongsToMany(Tag, { through: 'InventoryTag', as: 'tags' });
     Inventory.belongsToMany(Hospital, {
-      through: 'HospitalInventory',
+      through: HospitalInventory,
       as: 'hospitals',
     });
     Inventory.addScope('tags', {
@@ -38,8 +33,6 @@ module.exports = sequelize => {
         {
           model: Tag,
           as: 'tags',
-          attributes: ['id', 'name', 'description'],
-          through: { attributes: [] },
         },
       ],
     });
@@ -48,8 +41,6 @@ module.exports = sequelize => {
         {
           model: Hospital,
           as: 'hospitals',
-          attributes: ['id', 'name', 'description'],
-          through: { attributes: [] },
         },
       ],
     });

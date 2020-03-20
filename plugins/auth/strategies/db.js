@@ -21,7 +21,7 @@ class DBStrategy extends Strategy {
 
     const user = await this._model(request).findOne({
       where: { username, password },
-      attributes: ['id', 'password'],
+      attributes: ['id', 'password', 'type'],
     });
 
     return user || false;

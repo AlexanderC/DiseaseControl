@@ -1,11 +1,13 @@
 const ListController = require('./list');
 const CreateController = require('./create');
-const UpdateController = require('./update');
+const PatchController = require('./patch');
 const RemoveController = require('./remove');
+const UpdateInventoryController = require('./update-inventory');
 
 module.exports = [
   new ListController(),
   new CreateController(),
   new RemoveController(),
-  new UpdateController(),
+  new PatchController(),
+  new UpdateInventoryController(),
 ];

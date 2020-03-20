@@ -40,6 +40,14 @@ class User extends Sequelize.Model {
   }
 
   /**
+   * Check if this is at least an supervisor user
+   * @returns {boolean}
+   */
+  isAtLeastSupervisor() {
+    return this.isAdmin() || this.isSupervisor();
+  }
+
+  /**
    * Check if this is an admin user
    * @returns {boolean}
    */

@@ -59,6 +59,7 @@ Docker Usage
 Build image:
 
 ```bash
+cp .sample.env .docker.env # Adjust your configurations...
 docker build -t dc-api .
 ```
 
@@ -78,7 +79,6 @@ Deploy
 ------
 
 ```bash
-cp .env .docker.env # Make modifications here...
 DEPLOY_SERVER_ROOT=/root/api DEPLOY_SERVER_DSN=root@139.59.159.64 ./bin/deploy.sh
 ```
 
@@ -94,4 +94,7 @@ TODO
 ----
 
 - [ ] Inventory CRUD
-- [ ] Patient Model and CRUD
+- [ ] Allow superviser to be asigned to a hospital
+- [ ] Add notifications
+- [ ] Add seeds (admin, hospitals, tags)
+- [ ] Websocket endpoint for realtime data

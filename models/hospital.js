@@ -2,7 +2,15 @@ const Sequelize = require('sequelize');
 const sequelizePaginate = require('sequelize-paginate');
 
 class Hospital extends Sequelize.Model {
-  // TODO
+  /**
+   * Check if an user is hospital supervisor
+   * @param {string|User} user
+   */
+  isSupervisor(user) {
+    const id = typeof user === 'string' ? user : user.id;
+
+    return (this.supervisors || []).filter(supervisor => supervisor.id === id);
+  }
 }
 
 module.exports = sequelize => {
@@ -21,20 +29,32 @@ module.exports = sequelize => {
   );
 
   Hospital.associate = models => {
-    const { Tag, Inventory } = models;
+    const { Tag, Inventory, HospitalInventory, User } = models;
 
-    Hospital.belongsToMany(Tag, { through: 'HospitalTags', as: 'tags' });
+    Hospital.belongsToMany(Tag, { through: 'HospitalTag', as: 'tags' });
     Hospital.belongsToMany(Inventory, {
-      through: 'HospitalInventory',
+      through: HospitalInventory,
       as: 'inventory',
+    });
+    Hospital.hasMany(HospitalInventory, { as: 'assignedInventory' });
+    Hospital.belongsToMany(User, {
+      through: 'HospitalSupervisor',
+      as: 'supervisors',
+    });
+    Hospital.addScope('supervisors', {
+      include: [
+        {
+          model: User,
+          as: 'supervisors',
+          attributes: ['id'],
+        },
+      ],
     });
     Hospital.addScope('tags', {
       include: [
         {
           model: Tag,
           as: 'tags',
-          attributes: ['id', 'name', 'description'],
-          through: { attributes: [] },
         },
       ],
     });
@@ -43,8 +63,6 @@ module.exports = sequelize => {
         {
           model: Inventory,
           as: 'inventory',
-          attributes: ['id', 'name', 'description', 'quantity'],
-          through: { attributes: [] },
         },
       ],
     });

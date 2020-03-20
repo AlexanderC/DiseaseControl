@@ -8,10 +8,9 @@ class Remove extends BaseController {
   features = () => ({ auth: true, ws: false, docs: true });
 
   config = ({ Joi }) => {
-    const { params } = this._validationSchema(Joi, /* partial = */ true);
     return {
       description: 'Delete a hospital',
-      validate: { params },
+      validate: this._validationSchema(Joi, /* partial = */ true),
     };
   };
 
