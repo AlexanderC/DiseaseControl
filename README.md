@@ -67,19 +67,22 @@ docker build -t dc-api .
 Run services:
 
 ```bash
-# Run production ready setup w/ Nginx proxy and Let's Encrypt certificate
-# You MUST set DEPLOY_HOSTNAME and DEPLOY_STAGE variables
-# DEPLOY_STAGE="local" for self signed
-# DEPLOY_STAGE="production" for Let's Encrypt certificate
-# Add FORCE_RENEW='true' if you find your certificates are not chained correctly
-DEPLOY_HOSTNAME=example.com DEPLOY_STAGE=local docker-compose up -d
-# or, run plain API...
-docker-compose up -d --scale https-api=0
+docker-compose up -d
 ```
 
 > Check if services as up and running by using `docker ps`
 
 Your application should have started on `0.0.0.0` at port `8000`.
+
+Deploy
+------
+
+```bash
+DEPLOY_SERVER_ROOT=/root/api DEPLOY_SERVER_DSN=root@139.59.159.64 \
+ ./bin/deploy.sh
+```
+
+> Before proceeding ensure you ssh key is authorized!
 
 Documentation
 --------

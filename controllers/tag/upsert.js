@@ -3,7 +3,7 @@ const BaseController = require('./lib/base-ctrl');
 class Upsert extends BaseController {
   method = () => 'POST';
 
-  path = () => '/tags';
+  path = () => '/admin/tag';
 
   features = () => ({ auth: true, ws: false, docs: true });
 
@@ -40,7 +40,7 @@ class Upsert extends BaseController {
       const isNewTag = name =>
         foundTags.find(tag => tag.name === name) === undefined;
 
-      return Promise.all([
+      await Promise.all([
         // remove missing tags
         Tag.destroy({
           where: { name: { [Sequelize.Op.notIn]: tagsNames } },

@@ -1,25 +1,5 @@
 version: '3.3'
 services:
-  https-api:
-    container_name: https-api
-    image: steveltn/https-portal:1
-    ports:
-      - '80:80'
-      - '443:443'
-    expose:
-      - '80'
-      - '443'
-    links:
-      - api
-    restart: always
-    environment:
-      DOMAINS: "${DEPLOY_HOSTNAME} -> http://api:8000"
-      STAGE: ${DEPLOY_STAGE} # "local" or "production"
-      # FORCE_RENEW: 'true' # If you find your certificates are not chained correctly
-      CLIENT_MAX_BODY_SIZE: 0 # Leave Hapi.js validating it
-      WEBSOCKET: 'true'
-    volumes:
-      - ssl-certs:/var/lib/https-portal
   api:
     image: dc-api
     container_name: api
@@ -45,4 +25,3 @@ services:
       - db-data:/var/lib/mysql
 volumes:
   db-data: {} # Database data
-  ssl-certs: {} # SSL certificates

@@ -3,7 +3,7 @@ const BaseController = require('./lib/base-ctrl');
 class Promote extends BaseController {
   method = () => 'PUT';
 
-  path = () => '/identity/{id}/promote';
+  path = () => '/admin/identity/{id}/promote';
 
   features = () => ({ auth: true, ws: false, docs: true });
 

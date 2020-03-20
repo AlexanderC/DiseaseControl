@@ -1,16 +1,21 @@
 const Sequelize = require('sequelize');
 const sequelizePaginate = require('sequelize-paginate');
 
-class Hospital extends Sequelize.Model {
+class Inventory extends Sequelize.Model {
   // TODO
 }
 
 module.exports = sequelize => {
-  Hospital.init(
+  Inventory.init(
     {
       id: { type: Sequelize.INTEGER, autoIncrement: true, primaryKey: true },
       name: { type: Sequelize.STRING, allowNull: false, unique: true },
       description: { type: Sequelize.TEXT, allowNull: true },
+      quantity: {
+        type: Sequelize.INTEGER.UNSIGNED,
+        allowNull: false,
+        defaultValue: 0,
+      },
       createdAt: Sequelize.DATE,
       updatedAt: Sequelize.DATE,
     },
@@ -20,15 +25,15 @@ module.exports = sequelize => {
     },
   );
 
-  Hospital.associate = models => {
-    const { Tag, Inventory } = models;
+  Inventory.associate = models => {
+    const { Tag, Hospital } = models;
 
-    Hospital.belongsToMany(Tag, { through: 'HospitalTags', as: 'tags' });
-    Hospital.belongsToMany(Inventory, {
+    Inventory.belongsToMany(Tag, { through: 'InventoryTags', as: 'tags' });
+    Inventory.belongsToMany(Hospital, {
       through: 'HospitalInventory',
-      as: 'inventory',
+      as: 'hospitals',
     });
-    Hospital.addScope('tags', {
+    Inventory.addScope('tags', {
       include: [
         {
           model: Tag,
@@ -38,19 +43,19 @@ module.exports = sequelize => {
         },
       ],
     });
-    Hospital.addScope('inventory', {
+    Inventory.addScope('hospitals', {
       include: [
         {
-          model: Inventory,
-          as: 'inventory',
-          attributes: ['id', 'name', 'description', 'quantity'],
+          model: Hospital,
+          as: 'hospitals',
+          attributes: ['id', 'name', 'description'],
           through: { attributes: [] },
         },
       ],
     });
   };
 
-  sequelizePaginate.paginate(Hospital);
+  sequelizePaginate.paginate(Inventory);
 
-  return Hospital;
+  return Inventory;
 };

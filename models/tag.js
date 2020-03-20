@@ -22,10 +22,7 @@ module.exports = sequelize => {
   Tag.associate = models => {
     const { Hospital } = models;
 
-    Tag.belongsToMany(Hospital, { through: 'HospitalTags' });
-    Tag.addScope('hospitals', {
-      include: Hospital,
-    });
+    Tag.belongsToMany(Hospital, { through: 'HospitalTags', as: 'hospitals' });
   };
 
   return Tag;
