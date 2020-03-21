@@ -106,7 +106,7 @@ DEPLOY_SERVER_ROOT=/root/api DEPLOY_SERVER_DSN=root@139.59.159.64 ./bin/deploy.s
 
 > NPM and Node needs to be set up using nvm, which is the only one supported for now =(
 
-> If your database host is not resolving, add it to `/etc/hosts` (e.g. `127.0.0.1 database`).
+> If your database host is not resolving when `DEPLOY_SEEDS=1` option added on deploy- add it to `/etc/hosts` (e.g. `127.0.0.1 database`).
 
 Documentation
 --------
