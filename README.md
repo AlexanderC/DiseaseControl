@@ -120,6 +120,5 @@ Links
 TODO
 ----
 
-- [ ] Add seeds (admin, hospitals, tags)
 - [ ] Websocket endpoint for realtime data
 - [ ] Move logic from controllers into services
