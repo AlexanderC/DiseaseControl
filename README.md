@@ -120,5 +120,7 @@ Links
 TODO
 ----
 
-- [ ] Websocket endpoint for realtime data
 - [ ] Move logic from controllers into services
+- [ ] Implement Milestone II (see [Product Vision](https://docs.google.com/document/d/15XOLQsRgfhh7dy5_gKIxMTNreHUQNgU5r3dOybIkKrw/edit))
+- [ ] Implement Milestone III (see [Product Vision](https://docs.google.com/document/d/15XOLQsRgfhh7dy5_gKIxMTNreHUQNgU5r3dOybIkKrw/edit))
+- [ ] Implement Milestone IV (see [Product Vision](https://docs.google.com/document/d/15XOLQsRgfhh7dy5_gKIxMTNreHUQNgU5r3dOybIkKrw/edit))

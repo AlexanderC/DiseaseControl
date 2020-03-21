@@ -21,7 +21,7 @@ class List extends BaseController {
     const baseUrl = getBaseUrl(/* includeProtocol = */ false);
 
     return {
-      description: 'Subscribe to hospital changes.',
+      description: 'List hospital and subscribe to changes.',
       notes: `
         To test connection use "wscat --connect ${baseUrl}/hospital/live".
         -----------
