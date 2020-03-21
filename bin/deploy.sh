@@ -27,14 +27,34 @@ _info "Exporting image into dc-api.tar archive"
 docker save dc-api > dc-api.tar || _fail
 
 _info "Sending image and configuration to $DEPLOY_SERVER_DSN"
-rsync -av dc-api.tar docker-compose.yml "$DEPLOY_SERVER_DSN:$DEPLOY_SERVER_ROOT/" || _fail
+if [ -z "$DEPLOY_SEEDS" ]; then
+  rsync -av dc-api.tar docker-compose.yml \
+    "$DEPLOY_SERVER_DSN:$DEPLOY_SERVER_ROOT/" || _fail
+else
+  rsync -av dc-api.tar docker-compose.yml .docker.env .sequelizerc package.json seeders node_modules bin \
+    "$DEPLOY_SERVER_DSN:$DEPLOY_SERVER_ROOT/" || _fail
+fi
 
 _info "Deploying image on remote server"
+_CMD_ADD="echo 'Skip running database seeds...'"
+if [ ! -z "$DEPLOY_SEEDS" ]; then
+  _CMD_ADD="$(cat <<-EOF
+echo "Waiting 5 seconds till services are up.."
+sleep 5
+mv .docker.env .env
+. /root/.nvm/nvm.sh
+npm run db:seeds:up
+rm -rf .env .sequelizerc package.json seeders node_modules bin
+EOF
+)"
+fi
 _CMD="$(cat <<-EOF
 cd '$DEPLOY_SERVER_ROOT'
 docker load --input dc-api.tar
 docker-compose up -d
-rm dc-api.tar docker-compose.yml
+$_CMD_ADD
+rm -rf dc-api.tar docker-compose.yml
+docker ps
 EOF
 )"
 ssh "$DEPLOY_SERVER_DSN" "$_CMD" || _fail

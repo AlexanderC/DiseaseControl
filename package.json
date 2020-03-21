@@ -10,7 +10,10 @@
     "monitor": "npx pm2 monit",
     "postinstall": "npx check-engine",
     "lint": "npx eslint src web plugins models controllers --fix",
-    "lint-staged": "npx lint-staged"
+    "lint-staged": "npx lint-staged",
+    "_db:configure": "./bin/db-config.sh",
+    "db:seeds:up": "npm run _db:configure && npx sequelize-cli db:seed:all",
+    "db:seeds:down": "npm run _db:configure && npx sequelize-cli db:seed:undo:all"
   },
   "repository": {
     "type": "git",
@@ -45,6 +48,7 @@
     "nodemailer": "6.x.x",
     "pm2": "4.x.x",
     "sequelize": "5.x.x",
+    "sequelize-cli": "^5.5.1",
     "sequelize-encrypted": "1.x.x",
     "sequelize-paginate": "1.x.x",
     "twig": "1.x.x"

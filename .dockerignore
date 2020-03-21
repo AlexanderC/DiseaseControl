@@ -11,3 +11,4 @@ dc-api.tar
 LICENSE
 node_modules/
 .env
+.db.json

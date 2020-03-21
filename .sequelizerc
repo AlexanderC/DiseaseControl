@@ -1,0 +1,17 @@
+'use strict';
+
+const path = require('path');
+const dotenv = require('dotenv');
+const fs = require('fs');
+
+let configFile = path.resolve(process.cwd(), '.env');
+if (!fs.existsSync(configFile)) {
+  configFile = path.resolve(process.cwd(), 'sample.env');
+}
+dotenv.config({ path: configFile });
+
+module.exports = {
+  config: path.join(__dirname, '.db.json'),
+  'migrations-path': path.join(__dirname, 'migrations'),
+  'seeders-path': path.join(__dirname, 'seeders'),
+};

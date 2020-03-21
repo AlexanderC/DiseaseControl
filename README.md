@@ -77,14 +77,36 @@ docker-compose up -d
 
 Your application should have started on `0.0.0.0` at port `8000`.
 
+Seed Data
+-----
+
+Run all database seeds:
+
+```bash
+npm run db:seeds:up
+```
+
+Drop all data seeded:
+
+```bash
+npm run db:seeds:down
+```
+
 Deploy
 ------
 
+Deploy to a server you have SSH access given:
+
 ```bash
+# Add DEPLOY_SEEDS=1 in case you need to run seeds, mainly on first deploy
 DEPLOY_SERVER_ROOT=/root/api DEPLOY_SERVER_DSN=root@139.59.159.64 ./bin/deploy.sh
 ```
 
-> Before proceeding ensure you ssh key is authorized!
+> The server has to be set up as of section `Prerequisites` (except Git).
+
+> NPM and Node needs to be set up using nvm, which is the only one supported for now =(
+
+> If your database host is not resolving, add it to `/etc/hosts` (e.g. `127.0.0.1 database`).
 
 Documentation
 --------
