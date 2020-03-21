@@ -108,9 +108,10 @@ DEPLOY_SERVER_ROOT=/root/api DEPLOY_SERVER_DSN=root@139.59.159.64 ./bin/deploy.s
 
 > If your database host is not resolving when `DEPLOY_SEEDS=1` option added on deploy- add it to `/etc/hosts` (e.g. `127.0.0.1 database`).
 
-Documentation
+Links
 --------
 
+- [Frontend Repository](https://github.com/nicoletailiuha/frontend-disease-control)
 - [Api Docs](http://localhost:8000/)
 - [Product Vision](https://docs.google.com/document/d/15XOLQsRgfhh7dy5_gKIxMTNreHUQNgU5r3dOybIkKrw/edit)
 
