@@ -10,6 +10,14 @@ if (!fs.existsSync(configFile)) {
 }
 dotenv.config({ path: configFile });
 
+process.env.MYSQL_NOW = new Date(
+  new Date(new Date(new Date()).toISOString()).getTime() -
+    new Date().getTimezoneOffset() * 60000,
+)
+  .toISOString()
+  .slice(0, 19)
+  .replace('T', ' ');
+
 module.exports = {
   config: path.join(__dirname, '.db.json'),
   'migrations-path': path.join(__dirname, 'migrations'),

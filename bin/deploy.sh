@@ -27,7 +27,7 @@ _info "Exporting image into dc-api.tar archive"
 docker save dc-api > dc-api.tar || _fail
 
 _info "Sending image and configuration to $DEPLOY_SERVER_DSN"
-if [ -z "$DEPLOY_SEEDS" ]; then
+if [ -z "$DEPLOY_SEEDS" ] && [ -z "$DEPLOY_SEEDS_RELOAD" ]; then
   rsync -av dc-api.tar docker-compose.yml \
     "$DEPLOY_SERVER_DSN:$DEPLOY_SERVER_ROOT/" || _fail
 else
@@ -37,12 +37,19 @@ fi
 
 _info "Deploying image on remote server"
 _CMD_ADD="echo 'Skip running database seeds...'"
-if [ ! -z "$DEPLOY_SEEDS" ]; then
+if [ ! -z "$DEPLOY_SEEDS" ] || [ ! -z "$DEPLOY_SEEDS_RELOAD" ]; then
+  _SEED_CMD_ADD="echo 'Skip droping old database seeds...'"
+
+  if [ ! -z "$DEPLOY_SEEDS_RELOAD" ]; then
+    _SEED_CMD_ADD="npm run db:seeds:down"
+  fi
+
   _CMD_ADD="$(cat <<-EOF
 echo "Waiting 5 seconds till services are up.."
 sleep 5
 mv .docker.env .env
 . /root/.nvm/nvm.sh
+$_SEED_CMD_ADD
 npm run db:seeds:up
 rm -rf .env .sequelizerc package.json seeders node_modules bin
 EOF

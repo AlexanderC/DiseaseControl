@@ -1,5 +1,7 @@
 'use strict';
 
+const { MYSQL_NOW } = process.env;
+
 module.exports = {
   up: (queryInterface, _Sequelize) => {
     return queryInterface.bulkInsert(
@@ -8,26 +10,38 @@ module.exports = {
         {
           name: 'copii',
           description: 'Copii',
+          createdAt: MYSQL_NOW,
+          updatedAt: MYSQL_NOW,
         },
         {
           name: 'adulti',
           description: 'Adulti',
+          createdAt: MYSQL_NOW,
+          updatedAt: MYSQL_NOW,
         },
         {
           name: 'gravide',
           description: 'Femei gravide',
+          createdAt: MYSQL_NOW,
+          updatedAt: MYSQL_NOW,
         },
         {
           name: 'forma-usoara',
           description: 'Forma usoara',
+          createdAt: MYSQL_NOW,
+          updatedAt: MYSQL_NOW,
         },
         {
           name: 'forma-medie',
           description: 'Forma medie',
+          createdAt: MYSQL_NOW,
+          updatedAt: MYSQL_NOW,
         },
         {
           name: 'forma-severa',
           description: 'Forma severa',
+          createdAt: MYSQL_NOW,
+          updatedAt: MYSQL_NOW,
         },
       ],
       {},

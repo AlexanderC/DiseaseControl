@@ -25,10 +25,6 @@ source .env || _fail
 _info "Creating database config to .db.json"
 _CMD="$(cat <<-EOF
 {
-  "production":  {
-    "url": "$DB_DSN",
-    "dialect": "mysql"
-  },
   "development":  {
     "url": "$DB_DSN",
     "dialect": "mysql"

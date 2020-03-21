@@ -1,7 +1,9 @@
 'use strict';
 
+const { MYSQL_NOW } = process.env;
+
 module.exports = {
-  up: (queryInterface, Sequelize) => {
+  up: (queryInterface, _Sequelize) => {
     return queryInterface.bulkInsert(
       'Hospitals',
       [
@@ -9,18 +11,26 @@ module.exports = {
           name: 'scmbcc',
           description:
             'Spitalul Clinic Municipal de Boli Contagioase pentru Copii',
+          createdAt: MYSQL_NOW,
+          updatedAt: MYSQL_NOW,
         },
         {
           name: 'tomaciorba',
           description: 'Spitalul Clinic de Boli Infecftioase "Toma Ciorba"',
+          createdAt: MYSQL_NOW,
+          updatedAt: MYSQL_NOW,
         },
         {
           name: 'mama-copilul',
           description: 'Institutul Mamei si Copilului',
+          createdAt: MYSQL_NOW,
+          updatedAt: MYSQL_NOW,
         },
         {
           name: 'scr',
           description: 'Spitalul Clinic Republican "Timofei Mosneaga"',
+          createdAt: MYSQL_NOW,
+          updatedAt: MYSQL_NOW,
         },
       ],
       {},

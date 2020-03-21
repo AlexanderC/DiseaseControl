@@ -9,6 +9,8 @@ function hash(password) {
     .digest('hex');
 }
 
+const { MYSQL_NOW } = process.env;
+
 module.exports = {
   up: (queryInterface, _Sequelize) => {
     return queryInterface.bulkInsert(
@@ -18,6 +20,8 @@ module.exports = {
           username: 'admin@example.com',
           password: hash('password'),
           type: 'admin',
+          createdAt: MYSQL_NOW,
+          updatedAt: MYSQL_NOW,
         },
       ],
       {},

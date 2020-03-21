@@ -99,6 +99,7 @@ Deploy to a server you have SSH access given:
 
 ```bash
 # Add DEPLOY_SEEDS=1 in case you need to run seeds, mainly on first deploy
+# Add DEPLOY_SEEDS_RELOAD=1 if you want to re-run seeds (e.g. a new one added)
 DEPLOY_SERVER_ROOT=/root/api DEPLOY_SERVER_DSN=root@139.59.159.64 ./bin/deploy.sh
 ```
 
@@ -106,7 +107,7 @@ DEPLOY_SERVER_ROOT=/root/api DEPLOY_SERVER_DSN=root@139.59.159.64 ./bin/deploy.s
 
 > NPM and Node needs to be set up using nvm, which is the only one supported for now =(
 
-> If your database host is not resolving when `DEPLOY_SEEDS=1` option added on deploy- add it to `/etc/hosts` (e.g. `127.0.0.1 database`).
+> If your database host is not resolving when `DEPLOY_SEEDS=1` or `DEPLOY_SEEDS_RELOAD=1` option added on deploy- add it to `/etc/hosts` (e.g. `127.0.0.1 database`).
 
 Links
 --------
@@ -114,6 +115,7 @@ Links
 - [Frontend Repository](https://github.com/nicoletailiuha/frontend-disease-control)
 - [Api Docs](http://localhost:8000/)
 - [Product Vision](https://docs.google.com/document/d/15XOLQsRgfhh7dy5_gKIxMTNreHUQNgU5r3dOybIkKrw/edit)
+- [Models EER Diagram](artifacts/models.png) 
 
 TODO
 ----
