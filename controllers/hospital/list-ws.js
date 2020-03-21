@@ -22,7 +22,12 @@ class List extends BaseController {
 
     return {
       description: 'Subscribe to hospital changes.',
-      notes: `To test connection use "wscat --connect ${baseUrl}/hospital/live".`,
+      notes: `
+        To test connection use "wscat --connect ${baseUrl}/hospital/live".
+        -----------
+        > To subscribe to changes send an empty frame.
+        > To install wscat run "npm i -g wscat"
+      `,
     };
   };
 
