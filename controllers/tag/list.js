@@ -5,7 +5,7 @@ class List extends BaseController {
 
   path = () => '/tag';
 
-  features = () => ({ auth: false, ws: false, docs: true });
+  features = () => ({ auth: true, ws: false, docs: true });
 
   config = () => ({ description: 'List tags' });
 

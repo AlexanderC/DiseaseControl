@@ -5,7 +5,7 @@ class List extends BaseController {
 
   path = () => '/hospital';
 
-  features = () => ({ auth: false, ws: false, docs: true });
+  features = () => ({ auth: true, ws: false, docs: true });
 
   config = () => ({ description: 'List hospitals' });
 

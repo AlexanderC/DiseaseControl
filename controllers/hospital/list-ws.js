@@ -7,7 +7,7 @@ class List extends BaseController {
   path = () => '/hospital/live';
 
   features = () => ({
-    auth: false,
+    auth: true,
     ws: { only: true, autoping: 30 * 1000 },
     docs: true,
   });
@@ -25,6 +25,7 @@ class List extends BaseController {
       notes: `
         To test connection use "wscat --connect ${baseUrl}/hospital/live".
         -----------
+        > To authorize your calls to WebSocket endpoints you must use "?token={token}" query parameter.
         > To subscribe to changes send an empty frame.
         > To install wscat run "npm i -g wscat"
       `,
