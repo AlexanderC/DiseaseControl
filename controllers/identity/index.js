@@ -3,6 +3,7 @@ const LoginController = require('./login');
 const RegisterController = require('./register');
 const ResetController = require('./reset');
 const PromoteController = require('./promote');
+const RemoveController = require('./remove');
 
 module.exports = [
   new MeController(),
@@ -10,4 +11,5 @@ module.exports = [
   new ResetController(),
   new PromoteController(),
   new RegisterController(),
+  new RemoveController(),
 ];
