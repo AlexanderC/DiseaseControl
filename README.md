@@ -5,6 +5,18 @@ DiseaseControl is a disease control platform that facilitates end-to-end trackin
 
 > The project started at [C19.md Initiative](https://c19.md/) [Hackaton](https://c19.md/hackathon) (March 2020).
 
+Features:
+--------
+
+- [x] Milestone I
+   - [x] Authentication and Authorization (RBAC)
+   - [x] Add ability to onboard hospitals and groups them (2 level structure for now)
+   - [x] Add ability to manage hospital “beds” and critical inventory (such as Lung Ventilation Systems, protective stuff, main medicine)
+   - [x] Add ability to see available “beds” (e.g. for an ambulance) depending on the patient state and his needs.
+- [ ] Milestone II
+- [ ] Milestone III
+- [ ] Milestone IV
+
 Prerequisites
 -----------
 
