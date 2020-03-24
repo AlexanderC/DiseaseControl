@@ -29,9 +29,9 @@ class Login extends BaseController {
     );
 
     const { token } = await kernel.plugins.auth.authorize(kernel, request, h);
-    const { type } = request.user;
+    const { type, id } = request.user;
 
-    return { token, type };
+    return { token, type, id };
   }
 }
 
