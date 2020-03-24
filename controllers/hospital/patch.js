@@ -57,7 +57,7 @@ class Patch extends BaseController {
       }
 
       if (!supervisorUser.isAtLeastSupervisor()) {
-        supervisorUser.type = User.TYPES.SUPERVISOR;
+        supervisorUser.type = User.TYPE.SUPERVISOR;
         await supervisorUser.save();
       }
 

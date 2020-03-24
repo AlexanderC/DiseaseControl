@@ -9,7 +9,10 @@ class Hospital extends Sequelize.Model {
   isSupervisor(user) {
     const id = typeof user === 'string' ? user : user.id;
 
-    return (this.supervisors || []).filter(supervisor => supervisor.id === id);
+    return (
+      (this.supervisors || []).filter(supervisor => supervisor.id === id)
+        .length >= 1
+    );
   }
 }
 
