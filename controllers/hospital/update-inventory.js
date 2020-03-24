@@ -74,7 +74,10 @@ class UpdateInventory extends BaseController {
       hospital.assignedInventory.length <= 0
     ) {
       throw kernel.Boom.notFound('Hospital or Inventory Item does not exist');
-    } else if (!hospital.isSupervisor(request.user)) {
+    } else if (
+      !request.user.isAdmin() &&
+      !hospital.isSupervisor(request.user)
+    ) {
       throw kernel.Boom.unauthorized('You can update only assigned hospitals');
     }
 
