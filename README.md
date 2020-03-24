@@ -124,7 +124,7 @@ DEPLOY_SERVER_ROOT=/root/api DEPLOY_SERVER_DSN=root@139.59.159.64 ./bin/deploy.s
 Links
 --------
 
-- [Frontend Repository](https://github.com/nicoletailiuha/frontend-disease-control)
+- [Frontend Repository](https://github.com/AlexanderC/DiseaseControl-SPA)
 - [Api Docs](http://localhost:8000/)
 - [Product Vision](https://docs.google.com/document/d/15XOLQsRgfhh7dy5_gKIxMTNreHUQNgU5r3dOybIkKrw/edit)
 - [Models EER Diagram](artifacts/models.png) 
