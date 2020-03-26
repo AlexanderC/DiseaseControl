@@ -98,7 +98,20 @@ module.exports = sequelize => {
   );
 
   User.associate = models => {
-    // TODO
+    const { Hospital } = models;
+
+    User.belongsToMany(Hospital, {
+      through: 'HospitalSupervisor',
+      as: 'hospitals',
+    });
+    User.addScope('hospitals', {
+      include: [
+        {
+          model: Hospital,
+          as: 'hospitals',
+        },
+      ],
+    });
   };
 
   sequelizePaginate.paginate(User);

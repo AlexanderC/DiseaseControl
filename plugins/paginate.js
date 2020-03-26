@@ -54,20 +54,18 @@ class Paginate extends Plugin {
     routeObj.config.validate.options = routeObj.config.validate.options || {};
     routeObj.config.plugins.pagination = { enabled: true };
     routeObj.config.validate.options.allowUnknown = true;
-    const validation = Joi.object({
-      limit: Joi.number()
+    const validation = {
+      paginate: Joi.number()
         .integer()
         .default(50)
-        .description('Limit items per listing')
+        .description('Items per page')
         .example(50),
-      offset: Joi.number()
+      page: Joi.number()
         .integer()
         .default(1)
-        .description('Offset items')
-        .example(0),
-    })
-      .unknown(false) // To avoid SQL injections
-      .label('Pagination');
+        .description('Page')
+        .example(1),
+    };
 
     routeObj.config.validate.query = routeObj.config.validate.query
       ? routeObj.config.validate.query.append(validation)
