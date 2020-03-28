@@ -30,6 +30,7 @@ class Core extends Plugin {
         plugin: HapiCORS,
         options: {
           origins: ['*'],
+          methods: ['POST, GET, OPTIONS', 'PUT', 'PATCH', 'DELETE'],
           allowCredentials: 'true',
         },
       },
