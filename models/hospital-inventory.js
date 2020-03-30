@@ -14,6 +14,11 @@ module.exports = sequelize => {
         allowNull: false,
         defaultValue: 0,
       },
+      total: {
+        type: Sequelize.INTEGER.UNSIGNED,
+        allowNull: false,
+        defaultValue: 100,
+      },
       createdAt: Sequelize.DATE,
       updatedAt: Sequelize.DATE,
     },

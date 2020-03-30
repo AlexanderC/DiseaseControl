@@ -9,21 +9,20 @@ function hash(password) {
     .digest('hex');
 }
 
+const USERS = ['admin', 'user', 'supervisor']; // user types/names
 const { MYSQL_NOW } = process.env;
 
 module.exports = {
   up: (queryInterface, _Sequelize) => {
     return queryInterface.bulkInsert(
       'Users',
-      [
-        {
-          username: 'admin@example.com',
-          password: hash('password'),
-          type: 'admin',
-          createdAt: MYSQL_NOW,
-          updatedAt: MYSQL_NOW,
-        },
-      ],
+      USERS.map(user => ({
+        username: `${user}@example.com`,
+        password: hash('password'),
+        type: user,
+        createdAt: MYSQL_NOW,
+        updatedAt: MYSQL_NOW,
+      })),
       {},
     );
   },
@@ -31,7 +30,11 @@ module.exports = {
   down: (queryInterface, Sequelize) => {
     return queryInterface.bulkDelete(
       'Users',
-      { username: { [Sequelize.Op.in]: ['admin@example.com'] } },
+      {
+        username: {
+          [Sequelize.Op.in]: USERS.map(user => `${user}@example.com`),
+        },
+      },
       {},
     );
   },

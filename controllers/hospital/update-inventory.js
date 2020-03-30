@@ -28,10 +28,16 @@ class UpdateInventory extends BaseController {
         payload: Joi.object({
           quantity: Joi.number()
             .integer()
-            .required()
+            .optional()
             .min(0)
-            .description('Hospital Inventory ID')
+            .description('Hospital Inventory Quantity')
             .example(100),
+          total: Joi.number()
+            .integer()
+            .optional()
+            .min(0)
+            .description('Hospital Inventory Total Quantity (admin only)')
+            .example(500),
         }).label('Inventory'),
       },
     };
@@ -42,7 +48,7 @@ class UpdateInventory extends BaseController {
    */
   async handler(kernel, request, _h) {
     const { id, hospitalInventoryId } = request.params;
-    const { quantity } = request.payload;
+    const { quantity, total } = request.payload;
 
     if (!request.user.isAtLeastSupervisor()) {
       throw kernel.Boom.unauthorized('You must be a supervisor or an admin');
@@ -79,9 +85,29 @@ class UpdateInventory extends BaseController {
       !hospital.isSupervisor(request.user)
     ) {
       throw kernel.Boom.unauthorized('You can update only assigned hospitals');
+    } else if (!quantity && !total) {
+      throw kernel.Boom.badRequest(
+        'Missing both quantity and total parameters',
+      );
     }
 
-    hospital.assignedInventory[0].quantity = quantity;
+    if (quantity) {
+      hospital.assignedInventory[0].quantity = quantity;
+    }
+
+    if (total && request.user.isAdmin()) {
+      hospital.assignedInventory[0].total = total;
+    }
+
+    if (
+      hospital.assignedInventory[0].quantity >
+      hospital.assignedInventory[0].total
+    ) {
+      throw kernel.Boom.badRequest(
+        'Quantity cannot be more than the total amount',
+      );
+    }
+
     await hospital.assignedInventory[0].save();
 
     return Hospital.scope('tags', 'inventory', 'supervisors').findByPk(
