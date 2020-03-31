@@ -61,7 +61,7 @@ class Patch extends BaseController {
         await supervisorUser.save();
       }
 
-      hospital.removeSupervisor(hospital.supervisor);
+      hospital.removeSupervisors(hospital.supervisors);
       hospital.addSupervisor(supervisor);
     }
 
