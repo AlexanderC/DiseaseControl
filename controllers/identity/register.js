@@ -48,7 +48,7 @@ class Register extends BaseController {
       kernel,
       request.payload.password,
     );
-    const { username, password } = request.payload;
+    const { username, password, role: type } = request.payload;
 
     const User = this._userModel(request);
     const userExists = await User.count({ where: { username } });
@@ -57,7 +57,7 @@ class Register extends BaseController {
       throw kernel.Boom.conflict('Identity Already Exists');
     }
 
-    const user = await User.create({ username, password });
+    const user = await User.create({ username, password, type });
 
     kernel.emit('user.register', user);
 
