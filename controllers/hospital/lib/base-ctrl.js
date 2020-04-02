@@ -56,12 +56,14 @@ class BaseController extends Controller {
     const tags = Joi.array()
       .items(Joi.string())
       .optional()
-      .example(['some-tag']);
+      .example(['some-tag'])
+      .label('TagsArray');
 
     const inventory = Joi.array()
       .items(Joi.string())
       .optional()
-      .example(['bed']);
+      .example(['bed'])
+      .label('InventoryArray');
 
     const description = Joi.string()
       .optional()

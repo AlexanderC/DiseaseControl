@@ -32,13 +32,19 @@ class UpdateInventory extends BaseController {
             .min(0)
             .description('Hospital Inventory Quantity')
             .example(100),
+          detailed: Joi.object()
+            .optional()
+            .description('Hospital Inventory Detailed Quantity')
+            .unknown(true)
+            .example({ 'critical severity': 50, 'medium severity': 50 })
+            .label('InventoryDetailed'),
           total: Joi.number()
             .integer()
             .optional()
             .min(0)
             .description('Hospital Inventory Total Quantity (admin only)')
-            .example(500),
-        }).label('Inventory'),
+            .example(250),
+        }).label('InventoryUpdate'),
       },
     };
   };
@@ -48,7 +54,7 @@ class UpdateInventory extends BaseController {
    */
   async handler(kernel, request, _h) {
     const { id, hospitalInventoryId } = request.params;
-    const { quantity, total } = request.payload;
+    const { quantity, total, detailed } = request.payload;
 
     if (!request.user.isAtLeastSupervisor()) {
       throw kernel.Boom.unauthorized('You must be a supervisor or an admin');
@@ -85,27 +91,25 @@ class UpdateInventory extends BaseController {
       !hospital.isSupervisor(request.user)
     ) {
       throw kernel.Boom.unauthorized('You can update only assigned hospitals');
-    } else if (!quantity && !total) {
-      throw kernel.Boom.badRequest(
-        'Missing both quantity and total parameters',
-      );
+    } else if (!quantity && !total && !detailed) {
+      throw kernel.Boom.badRequest('Nothing to update');
     }
 
-    if (quantity) {
-      hospital.assignedInventory[0].quantity = quantity;
-    }
+    /** The order of callls below is really important!!! */
+    try {
+      if (total && request.user.isAdmin()) {
+        hospital.assignedInventory[0].total = total;
+      }
 
-    if (total && request.user.isAdmin()) {
-      hospital.assignedInventory[0].total = total;
-    }
+      if (detailed) {
+        hospital.assignedInventory[0].detailed = detailed;
+      }
 
-    if (
-      hospital.assignedInventory[0].quantity >
-      hospital.assignedInventory[0].total
-    ) {
-      throw kernel.Boom.badRequest(
-        'Quantity cannot be more than the total amount',
-      );
+      if (quantity) {
+        hospital.assignedInventory[0].quantity = quantity;
+      }
+    } catch (e) {
+      throw kernel.Boom.badRequest(e.message);
     }
 
     await hospital.assignedInventory[0].save();

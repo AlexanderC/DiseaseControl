@@ -36,7 +36,7 @@ class BaseController extends Controller {
       payload: multiple
         ? Joi.array()
             .items(schema)
-            .label('Tags')
+            .label('TagsArray')
         : schema,
     };
   }
