@@ -1,4 +1,4 @@
-.gitignore
+.git_ignore
 sample.env
 README.md
 index.js
